@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<component type="Container" layout="LayeredLayout" layeredLayoutPreferredWidthMM="0.0" layeredLayoutPreferredHeightMM="0.0"  autolayout="true" name="ListUser">
-  <component type="SpanLabel" text="Span Label" preferredSize="63.150467mm 26.283295mm" name="sp">
-    <layoutConstraint insets="16.923077% 40.677967% auto auto" referenceComponents="-1 -1 -1 -1" referencePositions="0.0 0.0 0.0 0.0" />
-  </component>
+<component type="Form" layout="LayeredLayout" layeredLayoutPreferredWidthMM="0.0" layeredLayoutPreferredHeightMM="0.0"  autolayout="true" title="ListUser" scrollableY="true" name="ListUser">
 </component>

@@ -53,8 +53,13 @@ public class MyApplication {
             current.show();
             return;
         }
-      new AddUser(theme).show();
-      //new ListUser(theme).show();
+      //new AddUser(theme).show();
+      new ListUser(theme).show();
+      
+      
+      
+      
+      
     }
 
     public void stop() {

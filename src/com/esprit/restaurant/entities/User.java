@@ -50,7 +50,7 @@ public class User {
         return this.prenom;
     }
 
-    public void setPrenm(String prenom) {
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
     

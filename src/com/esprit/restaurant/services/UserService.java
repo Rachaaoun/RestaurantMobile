@@ -12,7 +12,10 @@ import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
+import com.codename1.ui.Form;
+import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.layouts.BoxLayout;
 import com.esprit.restaurant.utils.Statics;
 import java.io.IOException;
 import java.util.List;
@@ -102,19 +105,61 @@ public class UserService {
 
     }
     
-        public ArrayList<User> getAllUsers(){
+      public ArrayList<User> getAllUsers(){
         String url = Statics.BASE_URL+"/user/utilisateur/list";
+       
+        
+       ArrayList<User> result = new ArrayList<>();
+        
+        
         req.setUrl(url);
         req.setPost(false);
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
+        
+        
+         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
-                users = parseTasks(new String(req.getResponseData()));
-                req.removeResponseListener(this);
-            }
+                JSONParser jsonp;
+                jsonp = new JSONParser();
+
+                try {
+
+                    Map<String, Object> mapReclamations = jsonp.parseJSON(new CharArrayReader(new String(req.getResponseData()).toCharArray()));
+                    List<Map<String, Object>> listOfMaps = (List<Map<String, Object>>) mapReclamations.get("user");
+                   System.out.println("lissst"+mapReclamations);
+                    for(Map<String, Object> obj : listOfMaps) {
+                        User re = new User();
+
+                        String nom = obj.get("nom").toString();
+                        String prenom =obj.get("prenom").toString();
+                            String cin =obj.get("cin").toString();
+                        String email =obj.get("email").toString();
+                        String photo =obj.get("photo").toString();
+                        String password =obj.get("password").toString();
+                              float id = Float.parseFloat(obj.get("id").toString());
+                      re.setId((int)id);
+                      re.setNom(nom);
+                      re.setPassword(password);
+                      re.setPhoto(photo);
+                       re.setPrenom(prenom);
+                        re.setEmail(email);
+                        re.setCin(cin);
+                        result.add(re);
+          System.out.println("data "+obj.get("nom").toString());
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                
+             }
+
         });
+        
         NetworkManager.getInstance().addToQueueAndWait(req);
-        return users;
+        
+        
+        return result;
     }
+            
     
 }
